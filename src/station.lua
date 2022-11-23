@@ -7,12 +7,12 @@ local event = require("event")
 local component = require("component")
 local term = require("term")
 
-local modem = component.proxy("modem")
-local gpu = component.proxy("gpu")
+local modem = component.modem
+local gpu = component.gpu
 
 -- main loop
 
-:: menu ::
+::menu::
 
 while true do
   canBroadcast = true
@@ -21,58 +21,23 @@ while true do
   print("Version 1.0")
   print("")
   print("1 - Edit transmission text")
+  print("2 - Broadcast")
   select = io.read()
   
 -- broadcast
-  if canBroadcast then
+  if select == "2" then
     send = ""
     for line in io.lines("broadcast.txt") do
       send = send .. line .. ""
-
     end
-    while not os.time > os.time+broadcastDelay do end
     modem.broadcast(port,send)
-
+  end
 -- edit text
 
 -- read file
 
   if select == "1" then
-  ::edit::
-
-  term.clear()
-  for line in io.lines("broadcast.txt") do
-    print("line")
+    print("Edit broadcast.txt directly, will implement later.")
   end
-  
-  print("Type a number to edit its line.")
-  lineEdit = io.read()
-
-  if lineEdit > 20 then
-    goto(edit)
-  end
-
-  print("Editing line " .. lineEdit)
-  editText = io.read()
-
-
--- idk what this does
--- stolen from stackoverflow
-
-  local file = io.open(broadcast.txt, 'r')
-  local fileContent = {}
-  for line in file:lines() do
-      table.insert (fileContent, line)
-  end
-  io.close(file)
-
-  fileContent[lineEdit] = editText
-
-  file = io.open(inputFile, 'w')
-  for index, value in ipairs(fileContent) do
-        file:write(value..'')
-  end
-  io.close(file)
-  goto(menu)
-  end
+end
 end

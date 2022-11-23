@@ -1,5 +1,5 @@
 -- config
-port = 20 -- port no.
+port = -- port no.
 page = 1 -- page no. default
 textReqCldwn = 30 -- time in secs to request text
 
@@ -8,13 +8,14 @@ local event = require("event")
 local component = require("component")
 local colour = require("colors")
 
-local gpu = component.proxy("gpu")
-local modem = component.proxy("modem")
+local gpu = component.gpu
+local modem = component.gpu
 
 gpu.setDepth(4)
 gpu.setResolution(80,25)
 
 -- main loop
+while true do
 _,_,_,_,_,txt=event.pull("modem_message")
 
 -- update text
