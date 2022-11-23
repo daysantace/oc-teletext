@@ -14,12 +14,23 @@ local gpu = component.proxy("gpu")
 :: menu ::
 
 while true do
+  canBroadcast = true
   term.clear()
   print("OC-teletext")
   print("Version 1.0")
   print("")
   print("1 - Edit transmission text")
   select = io.read()
+  
+-- broadcast
+  if canBroadcast then
+    send = ""
+    for line in io.lines("broadcast.txt") do
+      send = send .. line .. ""
+
+    end
+    while not os.time > os.time+10 do end
+    modem.broadcast(port,send)
 
 -- edit text
 
