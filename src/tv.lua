@@ -1,16 +1,32 @@
-local function compAdd(com)
- return component.list(com)() or error(com .. " not found")
-end
+-- config
+port = 20 -- port no.
+page = 1 -- page no. default
+textReqCldwn = 30 -- time in secs to request text
 
-local gpu, modem =
- compAdd(gpu),
- compAdd(modem)
+-- init
+local event = require("event")
+local component = require("component")
+local colour = require("colors")
 
-component.invoke(gpu, "bind", compAdd("screen"))
-modem.open(20)
+local gpu = component.proxy("gpu")
+local modem = component.proxy("modem")
 
+gpu.setDepth(4)
+gpu.setResolution(80,25)
+
+-- main loop
 while True do
- _,_,_,_,_,txt=computer.pullSignal("modem_message")
+ os.time+textReqCldwn = delay
+ while os.time<delay do end
+ _,_,_,_,_,txt=event.pull("modem_message")
+
+-- update text
+ gpu.fill(0,0,80,25," ")
+ gpu.setBackground(colour.white,true)
+ gpu.setForeground(colour.black,true)
+ print("OC-Teletext v1.0 - Page " .. tostring(page))
+ gpu.setBackground(colour.black,true)
+ gpu.setForeground(colour.white,true)
  for i in string.gmatch(txt, "%S\n") do
   print(i)
  end
