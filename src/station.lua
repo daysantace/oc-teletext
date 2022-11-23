@@ -1,5 +1,6 @@
 -- config
 port = -- port
+broadcastDelay = 10 -- seconds between each broadcast
 
 -- init libs
 local event = require("event")
@@ -29,7 +30,7 @@ while true do
       send = send .. line .. ""
 
     end
-    while not os.time > os.time+10 do end
+    while not os.time > os.time+broadcastDelay do end
     modem.broadcast(port,send)
 
 -- edit text
