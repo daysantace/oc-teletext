@@ -15,10 +15,7 @@ gpu.setDepth(4)
 gpu.setResolution(80,25)
 
 -- main loop
-while True do
- os.time+textReqCldwn = delay
- while os.time<delay do end
- _,_,_,_,_,txt=event.pull("modem_message")
+_,_,_,_,_,txt=event.pull("modem_message")
 
 -- update text
  gpu.fill(0,0,80,25," ")
