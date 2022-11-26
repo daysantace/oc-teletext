@@ -16,8 +16,9 @@ gpu.setResolution(80,25)
 
 -- main loop
 while true do
+moden.open(port)
 _,_,_,_,_,txt=event.pull("modem_message")
-
+modem.close
 -- update text
  gpu.fill(0,0,80,25," ")
  gpu.setBackground(colour.white,true)
