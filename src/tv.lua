@@ -27,7 +27,7 @@ while true do
     gpu.setForeground(colour.black,true)
     gpu.fill(1,1,80,1," ")
     term.setCursor(1,1)
-    print(0,0,tostring("OC-Teletext v1.0 - Page " .. tostring(page)))
+    print(tostring("OC-Teletext v1.0 - Page " .. tostring(page)))
     gpu.setBackground(colour.black,true)
     gpu.setForeground(colour.white,true)
     print(text)
