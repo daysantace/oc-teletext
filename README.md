@@ -13,4 +13,4 @@ System requirements
 * Tier 2 screen
 * Tier 2 GPU
 * Tier 2 case
-* Network card (preferrably Wireless Tier 2)
+* Network card (preferrably wired)
