@@ -6,9 +6,11 @@ broadcastDelay = 10 -- seconds between each broadcast
 local event = require("event")
 local component = require("component")
 local term = require("term")
-
+local serialization = require("serialization")
 local modem = component.modem
 local gpu = component.gpu
+
+textwr = ""
 
 -- main loop
 
@@ -23,15 +25,19 @@ while true do
   print("1 - Edit transmission text")
   print("2 - Broadcast")
   select = io.read()
-  
+
 -- broadcast
   if select == "2" then
-    send = ""
+    textwr = ""
+    i = -1
     for line in io.lines("broadcast.txt") do
-      send = send .. line .. ""
+      i=i+1
+      textwr = textwr .. "\n" .. line
     end
-    modem.broadcast(port,send)
+
+    modem.broadcast(port,textwr)
   end
+
 -- edit text
 
 -- read file
@@ -39,5 +45,4 @@ while true do
   if select == "1" then
     print("Edit broadcast.txt directly, will implement later.")
   end
-end
 end
