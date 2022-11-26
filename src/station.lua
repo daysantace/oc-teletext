@@ -12,37 +12,22 @@ local gpu = component.gpu
 
 textwr = ""
 
+term.clear()
+print("OC-teletext")
+print("Version 1.1")
+print("Broadcasting text.")
+
 -- main loop
 
-::menu::
-
 while true do
-  canBroadcast = true
-  term.clear()
-  print("OC-teletext")
-  print("Version 1.0")
-  print("")
-  print("1 - Edit transmission text")
-  print("2 - Broadcast")
-  select = io.read()
-
 -- broadcast
-  if select == "2" then
-    textwr = ""
-    i = -1
-    for line in io.lines("broadcast.txt") do
-      i=i+1
-      textwr = textwr .. "\n" .. line
-    end
-
-    modem.broadcast(port,textwr)
-  end
-
--- edit text
-
--- read file
-
-  if select == "1" then
-    print("Edit broadcast.txt directly, will implement later.")
-  end
+time = os.time()+2
+while os.time() < time do end
+textwr = ""
+i = -1
+for line in io.lines("broadcast.txt") do
+  i=i+1
+  textwr = textwr .. "\n" .. line
+end
+modem.broadcast(port,textwr)
 end

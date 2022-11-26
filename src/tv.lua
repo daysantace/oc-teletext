@@ -15,6 +15,10 @@ local modem = component.modem
 gpu.setDepth(4)
 gpu.setResolution(80,25)
 
+gpu.fill(1,1,70,25," ")
+term.setCursor(1,1)
+print("Waiting for broadcast...")
+
 -- main loop
 while true do
     modem.open(port)
