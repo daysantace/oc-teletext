@@ -16,16 +16,17 @@ gpu.setResolution(80,25)
 
 -- main loop
 while true do
-_,_,_,_,_,txt=event.pull("modem_message")
-
+	modem.open(port)
+	_,_,_,_,_,txt=event.pull("modem_message")
+	modem.close()
 -- update text
- gpu.fill(0,0,80,25," ")
- gpu.setBackground(colour.white,true)
- gpu.setForeground(colour.black,true)
- print("OC-Teletext v1.0 - Page " .. tostring(page))
- gpu.setBackground(colour.black,true)
- gpu.setForeground(colour.white,true)
- for i in string.gmatch(txt, "%S\n") do
-  print(i)
- end
+	gpu.fill(0,0,80,25," ")
+	gpu.setBackground(colour.white,true)
+	gpu.setForeground(colour.black,true)
+	print("OC-Teletext v1.0 - Page " .. tostring(page))
+	gpu.setBackground(colour.black,true)
+	gpu.setForeground(colour.white,true)
+	for i in string.gmatch(txt, "%S\n") do
+		print(i)
+	end
 end
