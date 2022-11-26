@@ -20,14 +20,14 @@ print("Broadcasting text.")
 -- main loop
 
 while true do
--- broadcast
-time = os.time()+2
-while os.time() < time do end
-textwr = ""
-i = -1
-for line in io.lines("broadcast.txt") do
-  i=i+1
-  textwr = textwr .. "\n" .. line
-end
-modem.broadcast(port,textwr)
+  -- broadcast
+  time = os.time()+2
+  while os.time() < time do end
+  textwr = ""
+  i = -1
+  for line in io.lines("broadcast.txt") do
+    i=i+1
+    textwr = textwr .. "\n" .. line
+  end
+  modem.broadcast(port,textwr)
 end

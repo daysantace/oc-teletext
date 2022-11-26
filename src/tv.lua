@@ -22,7 +22,7 @@ print("Waiting for broadcast...")
 -- main loop
 while true do
     modem.open(port)
-    _,_,_,_,modem_msg=event.pull("modem_message")
+    _,_,_,_,_,modem_msg=event.pull("modem_message")
     modem.close()
     text = modem_msg
     -- update text
