@@ -22,9 +22,11 @@ print("Waiting for broadcast...")
 -- main loop
 while true do
     modem.open(port)
-    _,_,_,_,_,modem_msg=event.pull("modem_message")
+    _,_,_,_,_,text=event.pull("modem_message")
+    _,_,_,_,_,cF=event.pull("modem_message")
+    _,_,_,_,_,cB=event.pull("modem_message")
     modem.close()
-    text = modem_msg
+
     -- update text
     gpu.fill(1,1,80,25," ")
     gpu.setBackground(colour.white,true)
@@ -34,5 +36,5 @@ while true do
     print(tostring("OC-Teletext v1.0 - Page " .. tostring(page)))
     gpu.setBackground(colour.black,true)
     gpu.setForeground(colour.white,true)
-    print(text)
+    term.write(text,true)
 end

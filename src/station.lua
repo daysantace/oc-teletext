@@ -14,20 +14,19 @@ textwr = ""
 
 term.clear()
 print("OC-teletext")
-print("Version 1.1")
+print("Version 1.1.1")
 print("Broadcasting text.")
 
 -- main loop
 
 while true do
   -- broadcast
-  time = os.time()+2
-  while os.time() < time do end
+  os.sleep(5)
+
   textwr = ""
-  i = -1
+
   for line in io.lines("broadcast.txt") do
-    i=i+1
-    textwr = textwr .. "\n" .. line
+    textwr = textwr .. line
   end
   modem.broadcast(port,textwr)
 end
