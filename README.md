@@ -6,7 +6,7 @@ Teletext broadcasting software for OpenComputers.
 `tv.lua` - Receives teletext.
 
 ## System requirements
-This applies to both modules.<br>
+This is for the TV module only. The station can run on the minimum OpenOS requirements.
 <br>
 System requirements
 * All OpenOS requirements
