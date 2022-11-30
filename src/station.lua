@@ -13,9 +13,13 @@ local gpu = component.gpu
 textwr = ""
 
 term.clear()
-print("OC-teletext")
-print("Version 1.1")
+print("OC-teletext Station")
+print("Version 1.3")
 print("Broadcasting text.")
+print("")
+print("Broadcast info:")
+print("Port                  | " .. port)
+print("Seconds per broadcast | " .. broadcastDelay)
 
 -- main loop
 
@@ -27,18 +31,5 @@ while true do
     textwr = textwr .. " ".. line
   end
   
-  -- send colour
-  cB = ""
-  for line in io.lines("colourbg.txt") do
-    cB = cB.. " " .. line
-  end
-  
-  cF = ""
-  for line in io.lines("colourfg.txt") do
-    cF = cF .. " " .. line
-  end
-  
   modem.broadcast(port,textwr)
-  modem.broadcast(port,cB)
-  modem.broadcast(port,cF)
 end
