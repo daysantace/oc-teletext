@@ -22,20 +22,12 @@ print("Waiting for broadcast...")
 -- main loop
 while true do
   txtT = nil
-  cbT = nil
-  cfT = nil
   txtT = {}
-  cbT = {}
-  cfT = {}
   modem.open(port)
     _,_,_,_,_,txt = event.pull("modem_message")
-    _,_,_,_,_,cbR = event.pull("modem_message")
-    _,_,_,_,_,cfR = event.pull("modem_message")
     modem.close()
     -- unserialise
     for val in string.gmatch(txt, "%a+") do table.insert(txtT,val) end
-    for val in string.gmatch(cbR, "%a+") do table.insert(cbT,val) end
-    for val in string.gmatch(cfR, "%a+") do table.insert(cfT,val) end
     -- update text
     gpu.fill(1,1,80,25," ")
     gpu.setBackground(colour.white,true)
@@ -45,11 +37,14 @@ while true do
     print(tostring("OC-Teletext v1.0 - Page " .. tostring(page)))
     for i = 1, 20 do
       text = txtT[i]
-      cB = cbT[i]
-      cF = cfT[i]
-      
-      gpu.setBackground(cB,true)
-      gpu.setForeground(cF,true)
       print(text)
+    end
+
+    -- change port
+    if keyboard.isControlDown() then
+      term.clear()
+      print("Enter the channel you want. (If the channel is not properly configured, you will see a garbled mess!)
+      page = io.read()
+      page = tonumber(page)
     end
 end
