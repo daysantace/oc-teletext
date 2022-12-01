@@ -1,7 +1,5 @@
 -- config
-port = -- port no.
-page = 1 -- page no. default
-textReqCldwn = 30 -- time in secs to request text
+page = 1 -- change to whatever you want
 
 -- init
 local event = require("event")
@@ -9,8 +7,9 @@ local component = require("component")
 local colour = require("colors")
 local serialise = require("serialization")
 local term = require("term")
-local gpu = component.gpu
-local modem = component.modem
+
+local gpu = component.proxy(addres.gpu)
+local modem = component.proxy(address.modem)
 
 gpu.setDepth(4)
 gpu.setResolution(80,25)
@@ -18,7 +17,14 @@ gpu.setResolution(80,25)
 gpu.fill(1,1,80,25," ")
 term.setCursor(1,1)
 print("Waiting for broadcast...")
-
+print("Reading from page " .. tostring(page))
+print("Press Ctrl to change.")
+if keyboard.isControlDown() then
+  term.clear()
+  print("Enter the channel you want. (If the channel is not properly configured, you will see a garbled mess!)")
+  page = io.read()
+  page = tonumber(page)
+end
 -- main loop
 while true do
   txtT = nil
@@ -34,7 +40,7 @@ while true do
     gpu.setForeground(colour.black,true)
     gpu.fill(1,1,80,1," ")
     term.setCursor(1,1)
-    print(tostring("OC-Teletext v1.0 - Page " .. tostring(page)))
+    print(tostring("OC-Teletext v1.3 - Page " .. tostring(page)))
     for i = 1, 20 do
       text = txtT[i]
       print(text)
@@ -43,7 +49,7 @@ while true do
     -- change port
     if keyboard.isControlDown() then
       term.clear()
-      print("Enter the channel you want. (If the channel is not properly configured, you will see a garbled mess!)
+      print("Enter the channel you want. (If the channel is not properly configured, you will see a garbled mess!)")
       page = io.read()
       page = tonumber(page)
     end
