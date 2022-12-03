@@ -14,3 +14,7 @@ System requirements
 * Tier 2 GPU
 * Tier 2 case
 * Network card (preferrably wired)
+
+## Usage
+You should create a file called `broadcast.txt`.<br>
+The station will broadcast this exactly.
